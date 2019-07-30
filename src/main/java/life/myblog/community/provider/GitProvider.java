@@ -29,7 +29,6 @@ public class GitProvider {
             String[] split = str.split("&");
             String tokenstr = split[0];
             String token = tokenstr.split("=")[1];
-            System.out.println(token);
             return token;
         }catch (Exception e){
             e.printStackTrace();
