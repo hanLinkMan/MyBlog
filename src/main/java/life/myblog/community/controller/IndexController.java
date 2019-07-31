@@ -31,6 +31,7 @@ public class IndexController {
                 if(user != null){
                     request.getSession().setAttribute("user",user);
                 }
+                break;
             }
         }
         return "index";

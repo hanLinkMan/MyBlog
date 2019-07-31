@@ -1,0 +1,1 @@
+alter table QUESTION alter column LIKE_COUNT set default 0;
