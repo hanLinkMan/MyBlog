@@ -1,13 +1,14 @@
-package life.myblog.community.model;
+package life.myblog.community.dto;
 
+import life.myblog.community.model.User;
 import lombok.Data;
 
 /**
  * @author hlq
- * @create 2019-07-30 22:22
+ * @create 2019-08-08 20:11
  */
 @Data
-public class Question {
+public class QuestionDto {
     private Integer id;
     private String title;
     private String description;
@@ -18,4 +19,5 @@ public class Question {
     private Integer viewCount;
     private Integer commentCount;
     private Integer likeCount;
+    private User user;
 }

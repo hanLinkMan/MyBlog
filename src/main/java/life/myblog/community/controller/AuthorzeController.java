@@ -3,8 +3,8 @@ package life.myblog.community.controller;
 import life.myblog.community.dto.AccessTokenDTO;
 import life.myblog.community.dto.GithubUser;
 import life.myblog.community.mapper.UserMapper;
-import life.myblog.community.model.User;
 import life.myblog.community.provider.GitProvider;
+import life.myblog.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -59,6 +59,7 @@ public class AuthorzeController {
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            user.setAvatarUrl(githubUser.getAvatarUrl());
             userMapper.insert(user);
             //写入cookie
             response.addCookie(new Cookie("token",token));
