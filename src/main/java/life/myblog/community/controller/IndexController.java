@@ -1,5 +1,6 @@
 package life.myblog.community.controller;
 
+import life.myblog.community.dto.PageInfomationDto;
 import life.myblog.community.dto.QuestionDto;
 import life.myblog.community.mapper.QuestionMapper;
 import life.myblog.community.mapper.UserMapper;
@@ -29,7 +30,10 @@ public class IndexController {
     private UserMapper userMapper;
 
     @GetMapping("/index")
-    public String index(HttpServletRequest request,Model model){
+    public String index(HttpServletRequest request,
+                        Model model,
+                        @RequestParam(name = "page",defaultValue = "1") Integer page,
+                        @RequestParam(name = "size",defaultValue = "5") Integer size){
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for(Cookie cookie :cookies){
@@ -43,8 +47,8 @@ public class IndexController {
                 }
             }
         }
-        List<QuestionDto> questionList = questionService.list();
-        model.addAttribute("questions",questionList);
+        PageInfomationDto pageInfomation = questionService.list(page,size);
+        model.addAttribute("pageInfomation",pageInfomation);
         return "index";
     }
     @GetMapping("/error")
