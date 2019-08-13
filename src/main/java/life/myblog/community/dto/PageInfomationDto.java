@@ -20,20 +20,8 @@ public class PageInfomationDto {
     private List<Integer> pages = new ArrayList<>();
     private Integer totalPage;
 
-    public void setPageInfomation(Integer totalCount, Integer page, Integer size) {
-
-        if(totalCount % size == 0){
-            totalPage = totalCount/size;
-        }else {
-            totalPage = totalCount/size + 1;
-        }
-        //容错处理
-        if(page < 1){
-            page = 1;
-        }
-        if(page > totalPage){
-            page = totalPage;
-        }
+    public void setPageInfomation(Integer totalPage, Integer page) {
+        this.totalPage = totalPage;
         this.currentPage = page;
         //page=1~4 list 1 2 3 4 5 6 7
         //page=5   list 2 3 4 5 6 7 8
