@@ -5,8 +5,10 @@ import life.myblog.community.dto.GithubUser;
 import life.myblog.community.mapper.UserMapper;
 import life.myblog.community.provider.GitProvider;
 import life.myblog.community.model.User;
+import life.myblog.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,7 +38,7 @@ public class AuthorzeController {
     private String redirectUrl;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @GetMapping("/callback")
     public  String callback(@RequestParam(name="code")String code,
@@ -57,10 +59,10 @@ public class AuthorzeController {
             user.setToken(token);
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
+
             user.setAvatarUrl(githubUser.getAvatarUrl());
-            userMapper.insert(user);
+            userService.CreateOrUpdate(user);
+//            userMapper.insert(user);
             //写入cookie
             response.addCookie(new Cookie("token",token));
             //登陆成功，写cookie和session
@@ -73,5 +75,15 @@ public class AuthorzeController {
 
 
         }
+    }
+    @GetMapping("/logout")
+    public  String logout(HttpServletRequest request,
+                          HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        request.getSession().setAttribute("user",null);
+        Cookie cookie = new Cookie("token",null);
+        response.addCookie(cookie);
+    return "redirect:/index";
+
     }
 }
