@@ -1,8 +1,6 @@
 package life.myblog.community.controller;
 
 import life.myblog.community.dto.QuestionDto;
-import life.myblog.community.mapper.QuestionMapper;
-import life.myblog.community.mapper.UserMapper;
 import life.myblog.community.model.Question;
 import life.myblog.community.model.User;
 import life.myblog.community.service.QuestionService;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
